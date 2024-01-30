@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import HomePage from "./pages/home"
+import GamePage from "./pages/Game"
+import Blobs from "./components/Blobs"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default function App(){
+
+    const[userReady, setUserReady] = React.useState(false)
+
+    function startGame() {
+        setUserReady(prev => !prev)
+    }
+
+
+    return (
+        <main className="container"> 
+            <Blobs hasGameStarted ={userReady} color ={"yellow"}/>
+            {userReady? <GamePage /> : <HomePage toggle ={startGame} />}
+            <Blobs hasGameStarted ={userReady} color ={"blue"}/>
+        </main>
+        
+    )
 }
-
-export default App;
