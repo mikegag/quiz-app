@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React from "react"
 import Footer from "../components/Footer"
 import Question from "../components/Question"
 
@@ -9,13 +9,16 @@ export default function GamePage(){
     const[readyForResults, setReadyForResults] = React.useState(false)
     const[reload, setReload] = React.useState(false)
     const[userScore, setUserScore] = React.useState(0)
-    const isMounted = useRef(false)
+    const [isMounted, setIsMounted] = React.useState(false)
 
 
     React.useEffect(() => { 
+        let controller = new AbortController()
         async function fetchData() {
-            const response = await fetch("https://the-trivia-api.com/v2/questions?limit=4&difficulties=easy,medium")
+            const response = await fetch("https://the-trivia-api.com/v2/questions?limit=4&difficulties=easy,medium", 
+                {signal: controller.signal})
             const data = await response.json()
+            controller = null
 
             let questionList = []
             let answerList = []
@@ -32,9 +35,12 @@ export default function GamePage(){
             setAnswers(answerList)
             setCorrectAnswers(correctAnswerList)
         }
+        fetchData()
+        setIsMounted(true)
         return () => {
-            fetchData()
-            isMounted.current=true
+            if(controller) {
+                controller.abort()
+            }
         }
     }, [reload])
     
@@ -72,7 +78,7 @@ export default function GamePage(){
                     />
                 )) 
             : 
-                null
+                <h1 className="question-title">Give us a few moments while we fetch some questions...</h1>
             }
             {isMounted ? <Footer updateDisplay={updateDisplay} results={userScore}/> : <></> }
         </div>
