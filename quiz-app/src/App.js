@@ -5,13 +5,11 @@ import Blobs from "./components/Blobs"
 
 
 export default function App(){
-
     const[userReady, setUserReady] = React.useState(false)
 
     function startGame() {
         setUserReady(prev => !prev)
     }
-
 
     return (
         <main className="container"> 

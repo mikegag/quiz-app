@@ -4,7 +4,6 @@ export default function Footer(props){
     const [checkResult, setCheckResult] = React.useState(false)
 
     const handleUpdateDisplay = () => {
-        // Callback function passed from Game
         props.updateDisplay() 
         setCheckResult(!checkResult)
     }

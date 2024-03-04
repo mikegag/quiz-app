@@ -1,183 +1,192 @@
-html, body {
-    margin: 0;
-    padding: 0;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-    --main-font-color: #293264;
-    --main-background-color: #F5F7FB;
-    --dark-blue: #4D5B9E;
-    --light-blue: #DBDEF0;
-  }
+  --main-font-color: #293264;
+  --main-background-color: #f5f7fb;
+  --dark-blue: #4d5b9e;
+  --light-blue: #dbdef0;
+}
 
 body {
-    background: var(--main-background-color);
-    overscroll-behavior: none;
-    height: max-content;
+  background: var(--main-background-color);
+  overscroll-behavior: none;
+  height: max-content;
+  font-family: Karla, sans-serif;
 }
 
 .container,
 .homePage-container,
 .gamePage-container,
 .footer-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.homePage-container button, 
+.homePage-container button,
 .answer-option-btn,
 .footer-container button {
-    text-align: center;
-    font-family: Inter;
+  text-align: center;
+  font-family: Inter;
 }
 
 .default-style-btn {
-    border-radius: 30px;
-    background: var(--dark-blue);
-    color: var(--main-background-color);
-    font-size: 1.5rem;
-    font-weight: 500;
-    padding: 1em 2em;
-    border: none;
-    cursor: pointer;
+  border-radius: 30px;
+  background: var(--dark-blue);
+  color: var(--main-background-color);
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 1em 2em;
+  border: none;
+  cursor: pointer;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  height: auto;
 }
-
 
 /* ---- background blobs ---- */
 .blob-container {
-    z-index: -9999; 
+  z-index: -9999;
 }
 
 .yellow-blob {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
 }
 
 .blue-blob {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    margin: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
 }
-
 
 /* ---- home page section ---- */
 .homePage-container {
-    color: var(--main-font-color);
-    text-align: center;
-    font-family: Karla;
-    align-items: center;
-    margin: auto;
-    height: 100dvh;
+  color: var(--main-font-color);
+  text-align: center;
+  font-family: Karla, sans-serif;
+  align-items: center;
+  margin: auto;
+  height: 100dvh;
 }
 
 .homePage-container h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0 auto;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 auto;
 }
 
 .homePage-container h2 {
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin: 1em auto;
-    font-family: Inter;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 1em auto;
+  font-family: Inter;
 }
 
 .homePage-container button {
-    margin: 1em auto;
+  margin: 1em auto;
 }
 
-.homePage-container button:hover, 
-.footer-container button:hover { 
-    background: var(--main-font-color);
+.homePage-container button:hover,
+.footer-container button:hover {
+  background: var(--main-font-color);
 }
-
 
 /* ---- game page section ---- */
 @keyframes smoothEffect {
-    from {opacity: 0%;}
-    to {opacity: 100%;}
+  from {
+    opacity: 0%;
   }
+  to {
+    opacity: 100%;
+  }
+}
 
 .gamePage-container {
-    text-align: left;
-    height: max-content;
-    box-sizing:border-box;
-    margin: 0;
-    padding: 1em 0;
-    animation-name: smoothEffect;
-    animation-duration: 2.5s;
+  text-align: left;
+  height: max-content;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 1em 0;
+  animation-name: smoothEffect;
+  animation-duration: 2.5s;
 }
 
 .question-container {
-    border-bottom: 3px solid var(--light-blue);
-    margin: 1em 2em;
-    font-family: Karla;
-    color: #293264;
-    padding: 1em 0em 2em 0em;
+  border-bottom: 3px solid var(--light-blue);
+  margin: 1em 2em;
+  font-family: Karla;
+  color: #293264;
+  padding: 1em 0em 2em 0em;
+  min-width: 80vw;
 }
 
 .question-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 1em 0;
-    width: 100%;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 1em 0;
+  width: 100%;
+}
+
+.error-msg {
+  color: var(--main-font-color);
+  margin: 6em 2em 1em 2em;
+  animation-name: smoothEffect;
+  animation-duration: 1s;
 }
 
 .answer-option-btn {
-    background: var(--main-background-color);
-    border: 1px solid var(--dark-blue);
-    border-radius: 20px;
-    color: #293264;
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 0.5em 1em;
-    margin: auto 1em 1em 0;
-    cursor: pointer;
+  background: var(--main-background-color);
+  border: 1px solid var(--dark-blue);
+  border-radius: 20px;
+  color: #293264;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.5em 1em;
+  margin: auto 1em 1em 0;
+  cursor: pointer;
 }
-
 
 /* ---- footer section ---- */
 .footer-container {
-    text-align: center;
-    margin: 0 auto 2em auto;
-    animation-name: smoothEffect;
-    animation-duration: 3s;
-    padding: 0 1em 2em 1em;
+  text-align: center;
+  margin: 0 auto 2.5em auto;
+  animation-name: smoothEffect;
+  animation-duration: 2s;
+  padding: 0 1em 2em 1em;
 }
 
 .footer-title {
-    color: var(--main-font-color);
-    font-family: Inter;
-    font-size: 1.8rem;
-    font-weight: 700;
+  color: var(--main-font-color);
+  font-family: Inter;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .footer-container button {
-    margin: auto;
+  margin: auto;
 }
-
 
 /* ---- Media Queries ---- */
 @media (min-width: 800px) {
-    .homePage-container h1 {
-        font-size: 4rem;
-    }
+  .homePage-container h1 {
+    font-size: 4rem;
+  }
 
-    .question-container {
-        margin: 1em 5em;
-    }
+  .question-container {
+    margin: 1em 6em;
+  }
 }

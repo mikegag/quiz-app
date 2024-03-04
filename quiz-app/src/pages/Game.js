@@ -1,3 +1,89 @@
+// import React from "react"
+// import Footer from "../components/Footer"
+// import Question from "../components/Question"
+
+// export default function GamePage(){
+//     const[questions, setQuestions] = React.useState([])
+//     const[answers, setAnswers] = React.useState([])
+//     const[correctAnswers, setCorrectAnswers] = React.useState([])
+//     const[readyForResults, setReadyForResults] = React.useState(false)
+//     const[reload, setReload] = React.useState(false)
+//     const[userScore, setUserScore] = React.useState(0)
+//     const[isMounted, setIsMounted] = React.useState(false)
+
+
+//     React.useEffect(() => { 
+//         let controller = new AbortController()
+//         async function fetchData() {
+//             const response = await fetch("https://the-trivia-api.com/v2/questions?limit=4&difficulties=easy,medium", 
+//                 {signal: controller.signal})
+//             const data = await response.json()
+//             controller = null
+
+//             let questionList = []
+//             let answerList = []
+//             let correctAnswerList = []
+
+//             for(let i=0; i < data.length; i++) {
+//                 questionList.push(data[i].question.text)
+//                 answerList.push(data[i].incorrectAnswers)
+//                 correctAnswerList.push(data[i].correctAnswer)
+//                 answerList[i].splice((Math.random()*data.length),0,data[i].correctAnswer)
+//             }
+
+//             setQuestions(questionList)
+//             setAnswers(answerList)
+//             setCorrectAnswers(correctAnswerList)
+//         }
+//         fetchData()
+//         setIsMounted(true)
+//         return () => {
+//             if(controller) {
+//                 controller.abort()
+//             }
+//         }
+//     }, [reload])
+    
+//     // Reloads component (makes new api call for questions) when "play again" button is clicked
+//     const updateDisplay = () => {
+//         setReadyForResults(prev=> !prev )
+//         if(readyForResults) {setReload(prev=>!prev)}
+//     }
+
+//     // Updates the # of correct answers selected by user
+//     const updateUserScore =() => {
+//         setUserScore(prev=>prev+1)
+//         console.log("update func ran")
+//     }
+
+//     // Clears user score
+//     const resetUserScore =() => {
+//         setUserScore(0)
+//         console.log("reset func ran")
+//     }
+  
+//     return (
+//         <div className="gamePage-container"> 
+//             {isMounted ? 
+//                 questions.map((current, index) => (
+//                     <Question 
+//                         key={index} 
+//                         mainQuestion={current} 
+//                         answerOptions={answers[index]} 
+//                         correctOption={correctAnswers} 
+//                         updateDisplay={readyForResults}
+//                         updateUserScore={updateUserScore}
+//                         resetUserScore={resetUserScore}
+//                     />
+//                 )) 
+//             : 
+//                 <h1 className="question-title">Give us a few moments while we fetch some questions...</h1>
+//             }
+//             {isMounted ? <Footer updateDisplay={updateDisplay} results={userScore}/> : <></> }
+//         </div>
+//     )
+// }
+
 import React from "react"
 import Footer from "../components/Footer"
 import Question from "../components/Question"
@@ -9,59 +95,73 @@ export default function GamePage(){
     const[readyForResults, setReadyForResults] = React.useState(false)
     const[reload, setReload] = React.useState(false)
     const[userScore, setUserScore] = React.useState(0)
-    const [isMounted, setIsMounted] = React.useState(false)
+    const[isMounted, setIsMounted] = React.useState(false)
 
-
-    React.useEffect(() => { 
+    React.useEffect(() => {
         let controller = new AbortController()
+
         async function fetchData() {
-            const response = await fetch("https://the-trivia-api.com/v2/questions?limit=4&difficulties=easy,medium", 
-                {signal: controller.signal})
-            const data = await response.json()
-            controller = null
+            try {
+                const response = await fetch("https://the-trivia-api.com/v2/questions?limit=4&difficulties=easy,medium",
+                    { signal: controller.signal })
+                if (!response.ok) {
+                    throw new Error("Failed to fetch data")
+                }
+                const data = await response.json()
 
-            let questionList = []
-            let answerList = []
-            let correctAnswerList = []
+                let questionList = []
+                let answerList = []
+                let correctAnswerList = []
 
-            for(let i=0; i < data.length; i++) {
-                questionList.push(data[i].question.text)
-                answerList.push(data[i].incorrectAnswers)
-                correctAnswerList.push(data[i].correctAnswer)
-                answerList[i].splice((Math.random()*data.length),0,data[i].correctAnswer)
+                for (let i = 0; i < data.length; i++) {
+                    questionList.push(data[i].question.text)
+                    answerList.push(data[i].incorrectAnswers)
+                    correctAnswerList.push(data[i].correctAnswer)
+                    answerList[i].splice((Math.random() * data.length), 0, data[i].correctAnswer)
+                }
+
+                setQuestions(questionList)
+                setAnswers(answerList)
+                setCorrectAnswers(correctAnswerList)
+                setTimeout(() => {
+                    setIsMounted(true)
+                }, 500) 
+                
+            } catch (error) {
+                console.error("Error fetching data:", error)
+                setIsMounted(false)
             }
-
-            setQuestions(questionList)
-            setAnswers(answerList)
-            setCorrectAnswers(correctAnswerList)
         }
-        fetchData()
-        setIsMounted(true)
+
+        fetchData();
+
         return () => {
-            if(controller) {
+            if (controller) {
                 controller.abort()
             }
         }
     }, [reload])
-    
-    // Reloads component (makes new api call for questions) when "play again" button is clicked
+
     const updateDisplay = () => {
         setReadyForResults(prev=> !prev )
-        if(readyForResults) {setReload(prev=>!prev)}
+        if(readyForResults) {
+            setReload(prev=>!prev) 
+        }
     }
 
-    // Updates the # of correct answers selected by user
-    const updateUserScore =() => {
-        setUserScore(prev=>prev+1)
-        console.log("update func ran")
+    const updateUserScore = () => {
+        setUserScore(prev => Math.min(prev + 1, 4))
+        console.log("+")
     }
-
-    // Clears user score
+    
     const resetUserScore =() => {
         setUserScore(0)
-        console.log("reset func ran")
     }
-  
+
+    const decrementUserScore = () => {
+        setUserScore(prev => Math.max(prev - 1, 0));
+        console.log("-")
+    };
   
     return (
         <div className="gamePage-container"> 
@@ -75,12 +175,13 @@ export default function GamePage(){
                         updateDisplay={readyForResults}
                         updateUserScore={updateUserScore}
                         resetUserScore={resetUserScore}
+                        decrementUserScore={decrementUserScore}
                     />
                 )) 
             : 
-                <h1 className="question-title">Give us a few moments while we fetch some questions...</h1>
+                <h3 className="question-title error-msg">loading questions...</h3>
             }
-            {isMounted ? <Footer updateDisplay={updateDisplay} results={userScore}/> : <></> }
+            {isMounted ? <Footer updateDisplay={updateDisplay} results={userScore} /> : <></> }
         </div>
     )
 }
