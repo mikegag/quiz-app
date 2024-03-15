@@ -32,7 +32,7 @@ export default function Question(props) {
                 setPreviouslySelectedOptions(false)
             }
         }
-        setSelectedOptions(updatedSelectedOptions)
+        setSelectedOptions(updatedSelectedOptions) 
     }
     
     // Clears previously selected answers when the user wants to play again
