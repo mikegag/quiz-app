@@ -43,7 +43,7 @@ export default function Question(props) {
             setPreviouslySelectedOptions(false)
         }
         else { firstLoad.current = false}
-    }, [props.updateDisplay])
+    }, [props.updateDisplay]) 
    
 
     return (
