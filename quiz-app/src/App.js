@@ -6,7 +6,7 @@ import Blobs from "./components/Blobs"
 
 export default function App(){
     const[userReady, setUserReady] = React.useState(false)
-
+    // initiates a new game when user clicks start button
     function startGame() {
         setUserReady(prev => !prev)
     }

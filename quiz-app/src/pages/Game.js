@@ -47,7 +47,7 @@ export default function GamePage(){
             }
         }
 
-        fetchData();
+        fetchData()
 
         return () => {
             if (controller) {
@@ -65,7 +65,6 @@ export default function GamePage(){
 
     const updateUserScore = () => {
         setUserScore(prev => Math.min(prev + 1, 4))
-        console.log("+")
     }
     
     const resetUserScore =() => {
@@ -73,9 +72,8 @@ export default function GamePage(){
     }
 
     const decrementUserScore = () => {
-        setUserScore(prev => Math.max(prev - 1, 0));
-        console.log("-")
-    };
+        setUserScore(prev => Math.max(prev - 1, 0))
+    }
   
     return (
         <div className="gamePage-container"> 
@@ -93,7 +91,7 @@ export default function GamePage(){
                     />
                 )) 
             : 
-                <h3 className="question-title error-msg">loading questions...</h3>
+                <h3 className="question-title error-msg">Loading Questions...</h3>
             }
             {isMounted ? <Footer updateDisplay={updateDisplay} results={userScore} /> : <></> }
         </div>
