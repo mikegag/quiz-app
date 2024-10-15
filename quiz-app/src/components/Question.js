@@ -3,20 +3,21 @@ import React, { useEffect, useState, useRef } from "react"
 export default function Question(props) {
     const [selectedOptions, setSelectedOptions] = useState([])
     const [previouslySelectedOptions, setPreviouslySelectedOptions] = useState(false)
+    // tracks if the user is playing the game for the first time
     let firstLoad = useRef(true)
     const correctAnswer = props.correctOption
     
-    
+    // handles user answer selection
     const handleOptionClick = (choice, index) => {
         const isOptionSelected = selectedOptions.includes(index)
         const isCorrectSelection = correctAnswer.includes(choice)
         let updatedSelectedOptions
     
         if (isOptionSelected) {
-            updatedSelectedOptions = selectedOptions.filter(item => item !== index);
+            updatedSelectedOptions = selectedOptions.filter(item => item !== index)
            
             if(isCorrectSelection) {
-                setPreviouslySelectedOptions(true); 
+                setPreviouslySelectedOptions(true)
             }
         } 
         else {
