@@ -14,7 +14,7 @@ export default function App(){
     return (
         <main className="container"> 
             <Blobs hasGameStarted ={userReady} color ={"yellow"}/>
-            {userReady? <GamePage /> : <HomePage toggle ={startGame} />}
+            {userReady? <GamePage toggle ={startGame} /> : <HomePage toggle ={startGame} />}
             <Blobs hasGameStarted ={userReady} color ={"blue"}/>
         </main>
         

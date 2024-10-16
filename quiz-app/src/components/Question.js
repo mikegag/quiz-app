@@ -62,7 +62,8 @@ export default function Question(props) {
                         // Incorrect choice was made; current choice = red, 
                         : (isSelected ? "#F8BCBC" : 
                             // if unselected choice was correct; current choice = light green, rest = default color
-                            (isCorrect ? "#EDFCF1" : "#F5F7FB"))
+                            (isCorrect ? "#EDFCF1" : "#F5F7FB")),
+                    cursor: 'not-allowed'
                 }
 
                 return (
@@ -71,6 +72,7 @@ export default function Question(props) {
                         className="answer-option-btn"
                         onClick={() => handleOptionClick(current, index)}
                         style={props.updateDisplay ? checkAnswerStyle : defaultStyle}
+                        disabled={props.updateDisplay ? true : false}
                     >
                         {current}
                     </button>

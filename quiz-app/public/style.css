@@ -38,7 +38,7 @@ body {
   border-radius: 30px;
   background: var(--dark-blue);
   color: var(--main-background-color);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
   padding: 1em 2em;
   border: none;
@@ -131,11 +131,11 @@ body {
   font-family: Karla;
   color: #293264;
   padding: 1em 0em 2em 0em;
-  min-width: 80vw;
+  min-width: 90vw;
 }
 
 .question-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin: 0 0 1em 0;
   width: 100%;
@@ -153,7 +153,7 @@ body {
   border: 1px solid var(--dark-blue);
   border-radius: 20px;
   color: #293264;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 500;
   padding: 0.5em 1em;
   margin: auto 1em 1em 0;
@@ -163,7 +163,7 @@ body {
 /* ---- footer section ---- */
 .footer-container {
   text-align: center;
-  margin: 0 auto 2.5em auto;
+  margin: 0 auto 4em auto;
   animation-name: smoothEffect;
   animation-duration: 2s;
   padding: 0 1em 2em 1em;
@@ -172,7 +172,7 @@ body {
 .footer-title {
   color: var(--main-font-color);
   font-family: Inter;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 

@@ -2,7 +2,7 @@ import React from "react"
 import Footer from "../components/Footer"
 import Question from "../components/Question"
 
-export default function GamePage(){
+export default function GamePage(props){
     const[questions, setQuestions] = React.useState([])
     const[answers, setAnswers] = React.useState([])
     const[correctAnswers, setCorrectAnswers] = React.useState([])
@@ -95,12 +95,12 @@ export default function GamePage(){
                     />
                 )) 
             : 
-                <h3 className="question-title error-msg">
+                <h3 className="question-title error-msg" style={{'fontSize':'2rem'}}>
                     Loading Questions...
                 </h3>
             }
             {isMounted ? 
-                <Footer updateDisplay={updateDisplay} results={userScore} /> 
+                <Footer updateDisplay={updateDisplay} results={userScore} toggle ={props.toggle} /> 
             : 
                 <></> 
             }
