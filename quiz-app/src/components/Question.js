@@ -23,14 +23,25 @@ export default function Question(props) {
         else {
             updatedSelectedOptions = [...selectedOptions, index]
 
-            // Update the user score based on the selection
-            if (isCorrectSelection ) {
+            // Increment the user score if the correct answer is selected
+            if (isCorrectSelection && correctAnswer.length == 4 && selectedOptions.length <= 4) {
                 props.updateUserScore() 
                 setPreviouslySelectedOptions(false)
             } else if (!isCorrectSelection && previouslySelectedOptions) {
-                // Decrement score if correct answer is deselected for an incorrect one
+            // Decrement score if correct answer is deselected for an incorrect one
                 props.decrementUserScore()
                 setPreviouslySelectedOptions(false)
+            }
+            //needs to be reworked -----------------------------------------------------------------------
+            else if (!isCorrectSelection && selectedOptions.includes(correctAnswer)) {
+                // Decrement score if correct answer is deselected for an incorrect one
+                    props.decrementUserScore()
+                    setPreviouslySelectedOptions(false)
+            }
+            else if (isCorrectSelection && selectedOptions.includes(correctAnswer)) {
+                // Decrement score if correct answer is deselected for an incorrect one
+                    props.decrementUserScore()
+                    setPreviouslySelectedOptions(false)
             }
         }
         setSelectedOptions(updatedSelectedOptions) 
@@ -58,7 +69,7 @@ export default function Question(props) {
                 const checkAnswerStyle = {
                     background: correctAnswer.includes(props.answerOptions[selectedOptions[0]])
                         // Correct choice was made; current choice = bright green, rest = default color
-                        ? (isSelected ? "#94D7A2" : "#F5F7FB")
+                        ? (isSelected && isCorrect? "#94D7A2" : (isSelected && !isCorrect? "#F8BCBC" : "#F5F7FB"))
                         // Incorrect choice was made; current choice = red, 
                         : (isSelected ? "#F8BCBC" : 
                             // if unselected choice was correct; current choice = light green, rest = default color
